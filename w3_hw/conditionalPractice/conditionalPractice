@@ -1,0 +1,33 @@
+//세로로 4칸 나누어져있고, 각 위치에 마우스를 놓을때마다 다른 도형이 나오는 프로그램을 만듭니다.
+//선, 정사각형, 직사각혛, 원 순서입니다.
+
+void setup() {
+  size(640, 360);
+}
+
+void draw() {
+  background(0);
+  rectMode(CENTER);
+
+
+  //if구문 4개 사용
+  if (mouseY < height /4) {
+    line(width * .5-50, 10, width * .5+50, 80);
+  } else if (mouseY < height / 4 * 2) {
+    //square(x좌표위치,y좌표위치,가로세로)
+    square(width * .5, height/4+45, 50);
+  } else if (mouseY < height / 4 * 3) {
+    rect(width * .5, height/4*2+45, 200, 50, 10);
+  } else {
+    circle(width * .5, height/4*3+45, 70);
+  }
+
+
+
+  stroke(127);
+  strokeWeight(4);
+  //line(첫번째꼭지점x좌표,첫번째꼭지점y좌표,두번째꼭지점x좌표,두번째꼭지점y좌표)
+  line(0, height/4, width, height/4 );
+  line(0, height/4*2, width, height/4*2 );
+  line(0, height/4*3, width, height/4*3);
+}
