@@ -1,0 +1,57 @@
+void setup() {
+  size(800, 800);
+}
+
+void draw() {
+  background(255);
+  translate(400, 400);
+
+  float clock = 230;
+
+  stroke(0);
+  for (int i=0; i<60; i++) {
+    float angle = radians(6*i);
+    float x1, y1, x2, y2;
+
+
+    //정시마크
+
+    if (i%5 ==0) { //i/5의 나머지가 0아면->즉, 정시면 선 굵기 4로 선을 그림.
+      stroke(2550, 0);
+      strokeWeight(3);
+      x1 = clock * cos(angle);
+      y1 = clock* sin(angle);
+      x2 = (clock-20) * cos(angle);
+      y2 = (clock-20) * sin(angle);
+      line(x1, y1, x2, y2);
+    } else { //나머지가 0이 아닌경우. 예를들어 36분은 나머지가 1 남는다.
+      stroke(0);
+      strokeWeight(2);
+      x1= clock * cos(angle);
+      y1= clock* sin(angle);
+      x2= (clock-10) * cos(angle);
+      y2= (clock-10) * sin(angle);
+      line(x1, y1, x2, y2);
+    }
+  }
+
+  float s= second();
+  float m= minute();
+  float h= hour();
+
+  float second = map(s, 0, 60, 0, TWO_PI) - HALF_PI;
+  stroke(255, 0, 0);
+  strokeWeight(1);
+  line(0, 0, clock * 0.8 * cos(second), clock * 0.8 * sin(second));
+
+
+  float min = map(m, 0, 60, 0, TWO_PI) - HALF_PI;
+  stroke(0);
+  strokeWeight(3);
+  line(0, 0, clock * 0.7 * cos(min), clock * 0.7 * sin(min));
+
+  float hour = map(h/12+ m/60, 0, 12, 0, TWO_PI) - HALF_PI;
+  stroke(0);
+  strokeWeight(6);
+  line(0, 0, clock * 0.5 * cos(hour), clock * 0.5 * sin(hour));
+}
