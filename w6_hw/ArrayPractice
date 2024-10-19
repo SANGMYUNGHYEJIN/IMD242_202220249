@@ -1,0 +1,52 @@
+int[] fruitAmts;
+int total; // 총합 변수
+int av; // 평균 변수
+String[] fruitNames = {"apple", "orange", "banana", "kiwi", "peach", "plum", "tangerine"};
+color[] barColor = new color[]{#f44336, #e69138, #ffd966, #93c47d, #f4cdcc, #a64d79, #ffa33c};
+
+
+void setup() {
+  size(1280, 720, P2D);
+
+  fruitAmts = new int[fruitNames.length];
+
+  for (int n = 0; n < fruitAmts.length; n++) {
+    if (n == 0) {
+      fruitAmts[n] = 50;
+    } else {
+      fruitAmts[n] = int(random(5, 150));
+    }
+  }
+   total = 0;
+  for (int n = 0; n < fruitAmts.length; n++) {
+    total += fruitAmts[n];
+  }
+  av = total / (int)fruitAmts.length; //후르츠랭쓰는 언제나 바뀔 수 있으며, 과일의 종류의   수를 의미함
+}
+
+float barGap = 88;
+float barWidth = 24;
+float x = 360;
+
+void draw () {
+  background(#edfffd);
+  strokeWeight(barWidth);
+
+  for (int n = 0; n < fruitNames.length; n++) {
+    stroke(255);
+    stroke(barColor[n]);
+    strokeCap(SQUARE);
+    textAlign(CENTER);
+    textSize(24);
+    fill(0);
+    line(x + barGap * n, height * 0.5+30,
+      x + barGap * n, height * 0.5+30 - 2 * fruitAmts[n]);
+    text(fruitNames[n],
+      x + barGap * n, height * 0.5+30 + 30);
+    text(fruitAmts[n],
+      x + barGap * n, height * 0.5+30 - 2 * fruitAmts[n] - 20);
+  }
+   textAlign(CENTER);
+  text("Total: " + total, width / 2, height - 140); 
+  text("Average: " + nf(av), width / 2, height - 180); 
+}
